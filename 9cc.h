@@ -52,6 +52,22 @@ bool at_eof();
 // 入力文字例pをトークナイズしてそれを返す。
 Token *tokenize();
 
+// ローカル変数
+typedef struct LVar LVar;
+
+struct LVar {
+  LVar *next; // 次の変数 
+  char *name; // 変数名
+  int len; // 名前の長さ
+  int offset; // RBPからのオフセット
+};
+
+// 現在のローカル変数リスト
+extern LVar *locals;
+
+// 名前でローカル変数を探す
+LVar *find_lvar(Token *tok);
+
 // パーサー
 typedef enum {
   ND_ADD, // +

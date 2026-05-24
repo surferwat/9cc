@@ -8,6 +8,7 @@
 char *user_input;
 Token *token;
 Node *code[100];
+LVar *locals;
 
 // エラーを報告するための関数
 // printfと同じ引数を取る。
@@ -133,6 +134,14 @@ int expect_number() {
 
 bool at_eof() {
   return token->kind == TK_EOF;
+}
+
+LVar *find_lvar(Token *tok) {
+  for (LVar *var = locals; var; var = var->next)
+    if (var->len == tok->len &&
+      !memcmp(tok->str, var->name, var->len))
+    return var;
+  return NULL;
 }
 
 static Node *new_node(NodeKind kind) {
@@ -271,7 +280,24 @@ static Node *primary() {
   Token *tok = consume_ident();
   if (tok) {
     Node *node = new_node(ND_LVAR);
-    node->offset = (tok->str[0] - 'a' + 1) * 8;
+    LVar *lvar = find_lvar(tok);
+    if (lvar) {
+      node->offset = lvar->offset;
+    } else {
+      lvar = calloc(1, sizeof(LVar));
+      lvar->next = locals;
+      lvar->name = tok->str;
+      lvar->len = tok->len;
+
+      //allocate new stack slot
+      if (locals)
+        lvar->offset = locals->offset + 8;
+      else  
+        lvar->offset = 8;
+      
+        node->offset = lvar->offset;
+        locals = lvar;
+    }
     return node;
   }
 
