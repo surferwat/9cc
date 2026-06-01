@@ -48,6 +48,14 @@ static bool startswith(char *p, char *q) {
   return memcmp(p, q, strlen(q)) == 0;
 }
 
+// 英数字またはアンダースコアなら真を返す
+static bool is_alnum(char c) {
+  return ('a' <= c && c <= 'z') ||
+         ('A' <= c && c <= 'Z') ||
+         ('0' <= c && c <= '9') ||
+         c == '_';
+}
+
 // 入力文字例pをトークナイズしてそれを返す。
 Token *tokenize() {
   char *p = user_input;
@@ -71,6 +79,12 @@ Token *tokenize() {
 
     if (strchr("+-*/()<>=;", *p)) {
       cur = new_token(TK_RESERVED, cur, p++, 1);
+      continue;
+    }
+
+    if (strncmp(p, "return", 6) == 0 && !is_alnum(p[6])) {
+      cur = new_token(TK_RETURN, cur, p, 6);
+      p += 6;
       continue;
     }
 
@@ -103,6 +117,15 @@ bool consume(char *op) {
   token = token->next;
   return true;
 }
+
+// 次のトークンが指定された種類なら読み進めて真を返す
+bool consume_kind(TokenKind kind) {
+  if (token->kind != kind)
+    return false;
+  token = token->next;
+  return true;
+}
+
 
 Token *consume_ident() {
   if (token->kind != TK_IDENT)
@@ -180,9 +203,16 @@ void program() {
   code[i] = NULL;
 }
 
-// stmt = expr ";"
+// stmt = "return" expr ";" | expr ";"
 static Node *stmt() {
-  Node *node = expr();
+  Node *node;
+  if (consume_kind(TK_RETURN)) {
+    node = new_node(ND_RETURN);
+    node->lhs = expr();
+  } else {
+    node = expr();
+  }
+
   expect(";");
   return node;
 }

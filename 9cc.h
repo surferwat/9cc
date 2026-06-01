@@ -8,6 +8,7 @@ typedef enum {
   TK_RESERVED, // 記号
   TK_IDENT, // 識別子
   TK_NUM, // 整数トークン
+  TK_RETURN, // リターン
   TK_EOF // 入力の終わりを表すトークン
 } TokenKind;
 
@@ -38,6 +39,10 @@ void error_at(char *loc, char *fmt, ...);
 // 次のトークンが期待している記号のときには、トークンを一つ読み進めて
 // 真を返す。それ以上の場合には為を返す。
 bool consume(char *op);
+
+// 次のトークンが期待している種類のときには、トークンを一つ読み進めて
+// 真を返す。それ以外の場合には偽を返す。
+bool consume_kind(TokenKind kind);
 
 // 次のトークンが期待ている記号のときには、トークンを一つ読み進める。
 // それ以外の場合はエラーを報告する。
@@ -81,6 +86,7 @@ typedef enum {
   ND_LE, // <=
   ND_LVAR, // ローカル変数
   ND_NUM, // Integer
+  ND_RETURN, // Return
 } NodeKind;
 
 // AST ノード形式
