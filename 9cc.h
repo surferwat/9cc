@@ -1,114 +1,101 @@
-#ifndef NINECC_H
-#define NINECC_H
-
+#define _POSIX_C_SOURCE 200809L
+#include <assert.h>
+#include <ctype.h>
+#include <stdarg.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-// トークンの種類
+typedef struct Node Node;
+
+//
+// tokenize.c
+//
+
+// Token
 typedef enum {
-  TK_RESERVED, // 記号
-  TK_IDENT, // 識別子
-  TK_NUM, // 整数トークン
-  TK_RETURN, // リターン
-  TK_EOF // 入力の終わりを表すトークン
+  TK_IDENT,   // Identifiers
+  TK_PUNCT,   // Punctuators
+  TK_KEYWORD, // Keywords
+  TK_NUM,     // Numeric literals
+  TK_EOF,     // End-of-file markers
 } TokenKind;
 
+// Token type
 typedef struct Token Token;
-
-// トークン型
 struct Token {
-  TokenKind kind; // トークンの型
-  Token *next; // 次の入力トークン
-  int val; // kindがTK＿NUMの場合、その数値
-  char *str; // トークン文字例
-  int len; // トークンの長さ
+  TokenKind kind; // Token kind
+  Token *next;    // Next token
+  int val;        // If kind is TK_NUM, its value
+  char *loc;      // Token location
+  int len;        // Token length
 };
 
-// 入力プログラム
-extern char *user_input;
-
-// 現在差しているトークン
-extern Token *token;
-
-// エラーを報告するための関数
-// printfと同じ引数を取る。
 void error(char *fmt, ...);
-
-//　エラー箇所を報告する
 void error_at(char *loc, char *fmt, ...);
+void error_tok(Token *tok, char *fmt, ...);
+bool equal(Token *tok, char *op);
+Token *skip(Token *tok, char *op);
+Token *tokenize(char *input);
 
-// 次のトークンが期待している記号のときには、トークンを一つ読み進めて
-// 真を返す。それ以上の場合には為を返す。
-bool consume(char *op);
+//
+// parse.c
+//
 
-// 次のトークンが期待している種類のときには、トークンを一つ読み進めて
-// 真を返す。それ以外の場合には偽を返す。
-bool consume_kind(TokenKind kind);
-
-// 次のトークンが期待ている記号のときには、トークンを一つ読み進める。
-// それ以外の場合はエラーを報告する。
-void expect(char *op);
-
-//　次のトークンが数値の場合、トークンを一つ読み進めてその数値を返す。
-//　それ以外の場合にはエラーを報告する。
-int expect_number();
-
-bool at_eof();
-
-// 入力文字例pをトークナイズしてそれを返す。
-Token *tokenize();
-
-// ローカル変数
-typedef struct LVar LVar;
-
-struct LVar {
-  LVar *next; // 次の変数 
-  char *name; // 変数名
-  int len; // 名前の長さ
-  int offset; // RBPからのオフセット
+// Local variable
+typedef struct Obj Obj;
+struct Obj {
+  Obj *next;
+  char *name; // Variable name
+  int offset; // Offset from RBP
 };
 
-// 現在のローカル変数リスト
-extern LVar *locals;
+// Function
+typedef struct Function Function;
+struct Function {
+  Node *body;
+  Obj *locals;
+  int stack_size;
+};
 
-// 名前でローカル変数を探す
-LVar *find_lvar(Token *tok);
-
-// パーサー
+// AST node
 typedef enum {
-  ND_ADD, // +
-  ND_SUB, // -
-  ND_MUL, // *
-  ND_DIV, // /
-  ND_ASSIGN, // =
-  ND_EQ, // ==
-  ND_NE, // !=
-  ND_LT, // <
-  ND_LE, // <=
-  ND_LVAR, // ローカル変数
-  ND_NUM, // Integer
-  ND_RETURN, // Return
+  ND_ADD,       // +
+  ND_SUB,       // -
+  ND_MUL,       // *
+  ND_DIV,       // /
+  ND_NEG,       // unary -
+  ND_EQ,        // ==
+  ND_NE,        // !=
+  ND_LT,        // <
+  ND_LE,        // <=
+  ND_ASSIGN,    // =
+  ND_RETURN,    // "return"
+  ND_BLOCK,     // { ... }
+  ND_EXPR_STMT, // Expression statement
+  ND_VAR,       // Variable
+  ND_NUM,       // Integer
 } NodeKind;
 
-// AST ノード形式
-typedef struct Node Node;
+// AST node type
 struct Node {
   NodeKind kind; // Node kind
-  Node *lhs; // Left-hand side
-  Node *rhs; // Right-hand side
-  int val; // Used if kind == ND_NUM
-  int offset;
+  Node *next;    // Next node
+  Node *lhs;     // Left-hand side
+  Node *rhs;     // Right-hand side
+
+  // Block
+  Node *body;
+
+  Obj *var;      // Used if kind == ND_VAR
+  int val;       // Used if kind == ND_NUM
 };
 
-// パース結果のノードを順にストアする配列
-extern Node *code[100];
+Function *parse(Token *tok);
 
-// プログラム全体をパースする
-void program();
+//
+// codegen.c
+//
 
-// 式をパースする
-Node *expr();
-
-// コードジェネレーター
-void gen(Node *node);
-
-#endif
+void codegen(Function *prog);
