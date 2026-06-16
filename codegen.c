@@ -1,7 +1,7 @@
 #include "9cc.h"
 
 static int depth;
-static char *argreg[] = {"%rdi", "%rsi", "%rdx", "%rdx", "%rcx", "%r8", "%r9"};
+static char *argreg[] = {"%rdi", "%rsi", "%rdx", "%rcx", "%r8", "%r9"};
 static Function *current_fn;
 
 static void gen_expr(Node *node);
@@ -205,6 +205,11 @@ void codegen(Function *prog) {
     printf("  push %%rbp\n");
     printf("  mov %%rsp, %%rbp\n");
     printf("  sub $%d, %%rsp\n", fn->stack_size);
+
+    // Save passed-by-register arguments to the stack
+    int i = 0;
+    for (Obj *var = fn->params; var; var = var->next)
+      printf("  mov %s, %d(%%rbp)\n", argreg[i++], var->offset);
 
     // Emit code
     gen_stmt(fn->body);
