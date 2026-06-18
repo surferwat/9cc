@@ -5,3 +5,6 @@ Step 1: docker run -it --rm --platform linux/amd64 -v "$PWD":/work -w /work ubun
 Step 2: apt update && apt install -y build-essential 
 Step 3: make
 Step 4: ./test.sh
+
+Difficult tests
+assert 1 'int main() { int x[2][3]; int *y=x; *(y+1)=1; return *(*x+1); }'s
