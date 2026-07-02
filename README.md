@@ -13,3 +13,4 @@ string literal
 assert 97 'int main() { return "abc"[0]; }'
 string literals and pointer arithmetic
 efficiency of string literals implementation
+va_list ap
