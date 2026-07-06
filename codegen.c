@@ -231,7 +231,7 @@ static void assign_lvar_offsets(Obj *prog) {
       continue;
 
     int offset = 0;
-    for (Obj *var = prog->locals; var; var = var->next) {
+    for (Obj *var = fn->locals; var; var = var->next) {
       offset += var->ty->size;
       var->offset = -offset;
     }
