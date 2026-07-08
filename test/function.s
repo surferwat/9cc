@@ -1,3 +1,4 @@
+.file 1 "-"
   .data
   .globl .L..10
 .L..10:
@@ -233,11 +234,17 @@ main:
   push %rbp
   mov %rsp, %rbp
   sub $0, %rsp
+  .loc 1 61
+  .loc 1 61
+  .loc 1 61
+  .loc 1 61
   mov $3, %rax
   push %rax
+  .loc 1 61
   mov $0, %rax
   call ret3
   push %rax
+  .loc 1 61
   lea .L..0(%rip), %rax
   push %rax
   pop %rdx
@@ -245,10 +252,16 @@ main:
   pop %rdi
   mov $0, %rax
   call assert
+  .loc 1 62
+  .loc 1 62
+  .loc 1 62
   mov $8, %rax
   push %rax
+  .loc 1 62
+  .loc 1 62
   mov $3, %rax
   push %rax
+  .loc 1 62
   mov $5, %rax
   push %rax
   pop %rsi
@@ -256,6 +269,7 @@ main:
   mov $0, %rax
   call add2
   push %rax
+  .loc 1 62
   lea .L..1(%rip), %rax
   push %rax
   pop %rdx
@@ -263,10 +277,16 @@ main:
   pop %rdi
   mov $0, %rax
   call assert
+  .loc 1 63
+  .loc 1 63
+  .loc 1 63
   mov $2, %rax
   push %rax
+  .loc 1 63
+  .loc 1 63
   mov $5, %rax
   push %rax
+  .loc 1 63
   mov $3, %rax
   push %rax
   pop %rsi
@@ -274,6 +294,7 @@ main:
   mov $0, %rax
   call sub2
   push %rax
+  .loc 1 63
   lea .L..2(%rip), %rax
   push %rax
   pop %rdx
@@ -281,18 +302,28 @@ main:
   pop %rdi
   mov $0, %rax
   call assert
+  .loc 1 64
+  .loc 1 64
+  .loc 1 64
   mov $21, %rax
   push %rax
+  .loc 1 64
+  .loc 1 64
   mov $1, %rax
   push %rax
+  .loc 1 64
   mov $2, %rax
   push %rax
+  .loc 1 64
   mov $3, %rax
   push %rax
+  .loc 1 64
   mov $4, %rax
   push %rax
+  .loc 1 64
   mov $5, %rax
   push %rax
+  .loc 1 64
   mov $6, %rax
   push %rax
   pop %r9
@@ -304,6 +335,7 @@ main:
   mov $0, %rax
   call add6
   push %rax
+  .loc 1 64
   lea .L..3(%rip), %rax
   push %rax
   pop %rdx
@@ -311,22 +343,35 @@ main:
   pop %rdi
   mov $0, %rax
   call assert
+  .loc 1 65
+  .loc 1 65
+  .loc 1 65
   mov $66, %rax
   push %rax
+  .loc 1 65
+  .loc 1 65
   mov $1, %rax
   push %rax
+  .loc 1 65
   mov $2, %rax
   push %rax
+  .loc 1 65
+  .loc 1 65
   mov $3, %rax
   push %rax
+  .loc 1 65
   mov $4, %rax
   push %rax
+  .loc 1 65
   mov $5, %rax
   push %rax
+  .loc 1 65
   mov $6, %rax
   push %rax
+  .loc 1 65
   mov $7, %rax
   push %rax
+  .loc 1 65
   mov $8, %rax
   push %rax
   pop %r9
@@ -338,10 +383,13 @@ main:
   mov $0, %rax
   call add6
   push %rax
+  .loc 1 65
   mov $9, %rax
   push %rax
+  .loc 1 65
   mov $10, %rax
   push %rax
+  .loc 1 65
   mov $11, %rax
   push %rax
   pop %r9
@@ -353,6 +401,7 @@ main:
   mov $0, %rax
   call add6
   push %rax
+  .loc 1 65
   lea .L..4(%rip), %rax
   push %rax
   pop %rdx
@@ -360,24 +409,39 @@ main:
   pop %rdi
   mov $0, %rax
   call assert
+  .loc 1 66
+  .loc 1 66
+  .loc 1 66
   mov $136, %rax
   push %rax
+  .loc 1 66
+  .loc 1 66
   mov $1, %rax
   push %rax
+  .loc 1 66
   mov $2, %rax
   push %rax
+  .loc 1 66
+  .loc 1 66
   mov $3, %rax
   push %rax
+  .loc 1 66
+  .loc 1 66
   mov $4, %rax
   push %rax
+  .loc 1 66
   mov $5, %rax
   push %rax
+  .loc 1 66
   mov $6, %rax
   push %rax
+  .loc 1 66
   mov $7, %rax
   push %rax
+  .loc 1 66
   mov $8, %rax
   push %rax
+  .loc 1 66
   mov $9, %rax
   push %rax
   pop %r9
@@ -389,12 +453,16 @@ main:
   mov $0, %rax
   call add6
   push %rax
+  .loc 1 66
   mov $10, %rax
   push %rax
+  .loc 1 66
   mov $11, %rax
   push %rax
+  .loc 1 66
   mov $12, %rax
   push %rax
+  .loc 1 66
   mov $13, %rax
   push %rax
   pop %r9
@@ -406,10 +474,13 @@ main:
   mov $0, %rax
   call add6
   push %rax
+  .loc 1 66
   mov $14, %rax
   push %rax
+  .loc 1 66
   mov $15, %rax
   push %rax
+  .loc 1 66
   mov $16, %rax
   push %rax
   pop %r9
@@ -421,6 +492,7 @@ main:
   mov $0, %rax
   call add6
   push %rax
+  .loc 1 66
   lea .L..5(%rip), %rax
   push %rax
   pop %rdx
@@ -428,10 +500,16 @@ main:
   pop %rdi
   mov $0, %rax
   call assert
+  .loc 1 67
+  .loc 1 67
+  .loc 1 67
   mov $7, %rax
   push %rax
+  .loc 1 67
+  .loc 1 67
   mov $3, %rax
   push %rax
+  .loc 1 67
   mov $4, %rax
   push %rax
   pop %rsi
@@ -439,6 +517,7 @@ main:
   mov $0, %rax
   call add2
   push %rax
+  .loc 1 67
   lea .L..6(%rip), %rax
   push %rax
   pop %rdx
@@ -446,10 +525,16 @@ main:
   pop %rdi
   mov $0, %rax
   call assert
+  .loc 1 68
+  .loc 1 68
+  .loc 1 68
   mov $1, %rax
   push %rax
+  .loc 1 68
+  .loc 1 68
   mov $4, %rax
   push %rax
+  .loc 1 68
   mov $3, %rax
   push %rax
   pop %rsi
@@ -457,6 +542,7 @@ main:
   mov $0, %rax
   call sub2
   push %rax
+  .loc 1 68
   lea .L..7(%rip), %rax
   push %rax
   pop %rdx
@@ -464,14 +550,20 @@ main:
   pop %rdi
   mov $0, %rax
   call assert
+  .loc 1 69
+  .loc 1 69
+  .loc 1 69
   mov $55, %rax
   push %rax
+  .loc 1 69
+  .loc 1 69
   mov $9, %rax
   push %rax
   pop %rdi
   mov $0, %rax
   call fib
   push %rax
+  .loc 1 69
   lea .L..8(%rip), %rax
   push %rax
   pop %rdx
@@ -479,12 +571,21 @@ main:
   pop %rdi
   mov $0, %rax
   call assert
+  .loc 1 70
+  .loc 1 70
+  .loc 1 70
   mov $1, %rax
   push %rax
+  .loc 1 70
+  .loc 1 70
+  .loc 1 70
+  .loc 1 70
   mov $7, %rax
   push %rax
+  .loc 1 70
   mov $3, %rax
   push %rax
+  .loc 1 70
   mov $3, %rax
   push %rax
   pop %rdx
@@ -493,6 +594,7 @@ main:
   mov $0, %rax
   call sub_char
   push %rax
+  .loc 1 70
   lea .L..9(%rip), %rax
   push %rax
   pop %rdx
@@ -500,11 +602,16 @@ main:
   pop %rdi
   mov $0, %rax
   call assert
+  .loc 1 71
+  .loc 1 71
+  .loc 1 71
   lea .L..10(%rip), %rax
   push %rax
   pop %rdi
   mov $0, %rax
   call printf
+  .loc 1 72
+  .loc 1 72
   mov $0, %rax
   jmp .L.return.main
 .L.return.main:
@@ -518,8 +625,13 @@ fib:
   mov %rsp, %rbp
   sub $16, %rsp
   mov %rdi, -8(%rbp)
+  .loc 1 56
+  .loc 1 56
+  .loc 1 56
+  .loc 1 56
   mov $1, %rax
   push %rax
+  .loc 1 56
   lea -8(%rbp), %rax
   mov (%rax), %rax
   pop %rdi
@@ -528,13 +640,21 @@ fib:
   movzb %al, %rax
   cmp $0, %rax
   je .L.else.1
+  .loc 1 57
+  .loc 1 57
   mov $1, %rax
   jmp .L.return.fib
   jmp .L.end.1
 .L.else.1:
 .L.end.1:
+  .loc 1 58
+  .loc 1 58
+  .loc 1 58
+  .loc 1 58
+  .loc 1 58
   mov $2, %rax
   push %rax
+  .loc 1 58
   lea -8(%rbp), %rax
   mov (%rax), %rax
   pop %rdi
@@ -544,8 +664,12 @@ fib:
   mov $0, %rax
   call fib
   push %rax
+  .loc 1 58
+  .loc 1 58
+  .loc 1 58
   mov $1, %rax
   push %rax
+  .loc 1 58
   lea -8(%rbp), %rax
   mov (%rax), %rax
   pop %rdi
@@ -570,12 +694,19 @@ sub_char:
   mov %dil, -1(%rbp)
   mov %sil, -2(%rbp)
   mov %dl, -3(%rbp)
+  .loc 1 53
+  .loc 1 53
+  .loc 1 53
+  .loc 1 53
   lea -3(%rbp), %rax
   movsbq (%rax), %rax
   push %rax
+  .loc 1 53
+  .loc 1 53
   lea -2(%rbp), %rax
   movsbq (%rax), %rax
   push %rax
+  .loc 1 53
   lea -1(%rbp), %rax
   movsbq (%rax), %rax
   pop %rdi
@@ -595,9 +726,15 @@ addx:
   sub $16, %rsp
   mov %rdi, -8(%rbp)
   mov %rsi, -16(%rbp)
+  .loc 1 50
+  .loc 1 50
+  .loc 1 50
+  .loc 1 50
   lea -16(%rbp), %rax
   mov (%rax), %rax
   push %rax
+  .loc 1 50
+  .loc 1 50
   lea -8(%rbp), %rax
   mov (%rax), %rax
   mov (%rax), %rax
@@ -620,21 +757,34 @@ add6:
   mov %rcx, -32(%rbp)
   mov %r8, -40(%rbp)
   mov %r9, -48(%rbp)
+  .loc 1 47
+  .loc 1 47
+  .loc 1 47
+  .loc 1 47
   lea -48(%rbp), %rax
   mov (%rax), %rax
   push %rax
+  .loc 1 47
+  .loc 1 47
   lea -40(%rbp), %rax
   mov (%rax), %rax
   push %rax
+  .loc 1 47
+  .loc 1 47
   lea -32(%rbp), %rax
   mov (%rax), %rax
   push %rax
+  .loc 1 47
+  .loc 1 47
   lea -24(%rbp), %rax
   mov (%rax), %rax
   push %rax
+  .loc 1 47
+  .loc 1 47
   lea -16(%rbp), %rax
   mov (%rax), %rax
   push %rax
+  .loc 1 47
   lea -8(%rbp), %rax
   mov (%rax), %rax
   pop %rdi
@@ -660,9 +810,14 @@ sub2:
   sub $16, %rsp
   mov %rdi, -8(%rbp)
   mov %rsi, -16(%rbp)
+  .loc 1 44
+  .loc 1 44
+  .loc 1 44
+  .loc 1 44
   lea -16(%rbp), %rax
   mov (%rax), %rax
   push %rax
+  .loc 1 44
   lea -8(%rbp), %rax
   mov (%rax), %rax
   pop %rdi
@@ -680,9 +835,14 @@ add2:
   sub $16, %rsp
   mov %rdi, -8(%rbp)
   mov %rsi, -16(%rbp)
+  .loc 1 41
+  .loc 1 41
+  .loc 1 41
+  .loc 1 41
   lea -16(%rbp), %rax
   mov (%rax), %rax
   push %rax
+  .loc 1 41
   lea -8(%rbp), %rax
   mov (%rax), %rax
   pop %rdi
@@ -698,8 +858,13 @@ ret3:
   push %rbp
   mov %rsp, %rbp
   sub $0, %rsp
+  .loc 1 37
+  .loc 1 37
+  .loc 1 37
   mov $3, %rax
   jmp .L.return.ret3
+  .loc 1 38
+  .loc 1 38
   mov $5, %rax
   jmp .L.return.ret3
 .L.return.ret3:
